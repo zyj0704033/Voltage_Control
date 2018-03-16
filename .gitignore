@@ -4,3 +4,6 @@
 #startup_matlab file
 startup_matlab.m
 
+
+#np data
+*.npy
