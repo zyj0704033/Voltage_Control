@@ -7,3 +7,6 @@ startup_matlab.m
 
 #np data
 *.npy
+
+#data
+data
