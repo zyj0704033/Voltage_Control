@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import random
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from sklearn.metrics import silhouette_samples,silhouette_score
 
 npc = np.load('/home/t630/Voltage_Control/data/2015AGC/numpy_data/npwithoutnan2.npy')
 uselesslist = [18,21,22,27,34,43,44,53,56,57,58]
@@ -32,9 +33,9 @@ kmeans =  KMeans(n_clusters=8,max_iter=30000,n_jobs = 8)
 kmeans.fit(npc_c)
 print(kmeans.labels_)
 print(kmeans.inertia_)
+print(silhouette_score(npc_c+npc_c_mean.reshape((47,1)), kmeans.labels_))
 
-
-
+'''
 # tsne to plot
 from sklearn.manifold import TSNE
 tsne =  TSNE()
@@ -68,8 +69,9 @@ c_inertias = []
 for i in range(2,20):
     kmeansi = KMeans(n_clusters=i,max_iter=3000,n_jobs=8)
     kmeansi.fit(npc_c)
-    print(kmeansi.labels_)
-    print(kmeansi.inertia_)
+    #print(kmeansi.labels_)
+    #print(kmeansi.inertia_)
+    print(silhouette_score(npc_c,kmeansi.labels_))
     c_inertias.append(kmeansi.inertia_)
 plt.plot(range(2,20),c_inertias)
 
@@ -103,7 +105,7 @@ kmeans_rs =  KMeans(n_clusters=8,max_iter=30000,n_jobs = 8)
 kmeans_rs.fit(npc_sc)
 print(kmeans_rs.labels_)
 print(kmeans_rs.inertia_)
-
+'''
 #PCA
 pca = PCA(n_components = 10)
 pca.fit(npc_c)
